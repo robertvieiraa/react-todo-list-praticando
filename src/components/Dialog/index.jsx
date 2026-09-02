@@ -26,15 +26,17 @@ export function Dialog({ isOpen, children, onClose }) {
     <>
       <dialog ref={dialogRef} className="dialog">
         <div className="btn-close-wrapper">
-          <button 
-          autoFocus 
-          onClick={onClose} 
-          className="btn-close"
+          <button
+            autoFocus
+            onClick={onClose}
+            className="btn-close"
           >
             <IconClose />
           </button>
         </div>
-        {children}
+        <div className="body">
+          {children}
+        </div>
       </dialog>
     </>
   );
