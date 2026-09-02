@@ -1,7 +1,7 @@
 import './button.style.css'
 
-export function Button() {
+export function Button({ children }) {
     return (
-        <button className='btn'>Salvar item</button>
+        <button className='btn'>{children}</button>
     )
 }
