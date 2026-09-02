@@ -57,7 +57,6 @@ function App() {
 
   const toggleDialog = () => {
     setShowDialog(!showDialog)
-    console.log('Alternar modal')
   }
 
   return (
@@ -82,7 +81,9 @@ function App() {
             })}
           </ToDoList>
           <Footer>
-            <Dialog isOpen={showDialog} />
+            <Dialog isOpen={showDialog} onClose={toggleDialog}>
+              <p>This modal dialog has a groovy backdrop!</p>
+            </Dialog>
             <FabButton onClick={toggleDialog}>
               <IconPlus />
             </FabButton>
