@@ -1,32 +1,41 @@
-import { useEffect, useRef } from 'react'
-import './dialog.style.css'
+import { useEffect, useRef } from "react";
+import "./dialog.style.css";
+import { IconClose } from "../icons";
 
 export function Dialog({ isOpen, children, onClose }) {
-  let dialogRef = useRef(null)
+  let dialogRef = useRef(null);
 
   useEffect(() => {
     // console.log('deveríamos mostrar a modal?', isOpen)
     if (isOpen) {
-      openDialog()
+      openDialog();
     } else {
-      closeDialog()
+      closeDialog();
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   const openDialog = () => {
     dialogRef.current.showModal();
-  }
-  
+  };
+
   const closeDialog = () => {
-    dialogRef.current.close()
-  }
+    dialogRef.current.close();
+  };
 
   return (
     <>
-    <dialog ref={dialogRef}>
-				<button autoFocus onClick={onClose}>Close</button>
-				{children}
-			</dialog>
+      <dialog ref={dialogRef} className="dialog">
+        <div className="btn-close-wrapper">
+          <button 
+          autoFocus 
+          onClick={onClose} 
+          className="btn-close"
+          >
+            <IconClose />
+          </button>
+        </div>
+        {children}
+      </dialog>
     </>
-  )
+  );
 }
