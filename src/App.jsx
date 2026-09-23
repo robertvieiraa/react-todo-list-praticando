@@ -12,10 +12,14 @@ import TodoContext from "./components/TodoProvider/TodoContext"
 import { TodoGroup } from "./components/TodoGroup"
 
 function App() {
-  const { todos, addTodo, openFormTodoDialog, closeFormTodoDialog, showDialog } = use(TodoContext)
+  const { todos, addTodo, openFormTodoDialog, closeFormTodoDialog, showDialog, selectedTodo, editTodo } = use(TodoContext)
 
   function handleFormSubmit(formData) {
-    addTodo(formData)
+    if (selectedTodo) {
+      editTodo(formData)
+    } else {
+      addTodo(formData)
+    }
     closeFormTodoDialog()
   }
 
@@ -40,9 +44,10 @@ function App() {
             <Dialog isOpen={showDialog} onClose={closeFormTodoDialog}>
               <TodoForm 
               onSubmit={handleFormSubmit} 
+              defaultValue={selectedTodo?.description}
               />
             </Dialog>
-            <FabButton onClick={openFormTodoDialog}>
+            <FabButton onClick={() => openFormTodoDialog()}>
               <IconPlus />
             </FabButton>
           </Footer>
