@@ -3,7 +3,7 @@ import { IconPencil, IconTrash } from "../icons";
 import { use } from 'react';
 import TodoContext from '../TodoProvider/TodoContext';
 
-export function ToDoItem ({ item, onToggleCompleted, onDeleteTodo }) {
+export function ToDoItem ({ item }) {
     const {toggleTodoCompleted, deleteTodo} = use(TodoContext)
 
     const styles = ['todo-item']

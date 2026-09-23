@@ -8,6 +8,16 @@ export function TodoProvider({ children }) {
 
 	const [todos, setTodos] = useState(savedTodos ? JSON.parse(savedTodos) : [])
 
+	const [showDialog, setShowDialog] = useState(false)
+
+	const openFormTodoDialog = () => {
+    setShowDialog(true)
+  }
+
+  const closeFormTodoDialog = () => {
+    setShowDialog(false)
+  }
+
 	useEffect(() => {
 		localStorage.setItem(TODOS, JSON.stringify(todos))
 	}, [todos])
@@ -50,7 +60,10 @@ export function TodoProvider({ children }) {
 			todos,
 			addTodo,
 			toggleTodoCompleted,
-			deleteTodo
+			deleteTodo,
+			openFormTodoDialog,
+			closeFormTodoDialog,
+			showDialog
 		}}>
 			{children}
 		</TodoContext>

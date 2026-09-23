@@ -1,4 +1,4 @@
-import { use, useState } from "react"
+import { use } from "react"
 import { ChecklistsWrapper } from "./components/ChecklistsWrapper"
 import { Container } from "./components/Container"
 import { Dialog } from "./components/Dialog"
@@ -7,25 +7,16 @@ import { Footer } from "./components/Footer"
 import { Header } from "./components/Header"
 import { Heading } from "./components/Heading"
 import { IconPlus, IconSchool } from "./components/icons"
-import { SubHeading } from "./components/SubHeading"
-import { ToDoItem } from "./components/ToDoItem"
-import { ToDoList } from "./components/ToDoList"
 import { TodoForm } from "./components/TodoForm"
 import TodoContext from "./components/TodoProvider/TodoContext"
 import { TodoGroup } from "./components/TodoGroup"
 
 function App() {
-  const [showDialog, setShowDialog] = useState(false)
-
-  const { todos, addTodo } = use(TodoContext)
-
-  const toggleDialog = () => {
-    setShowDialog(!showDialog)
-  }
+  const { todos, addTodo, openFormTodoDialog, closeFormTodoDialog, showDialog } = use(TodoContext)
 
   function handleFormSubmit(formData) {
     addTodo(formData)
-    toggleDialog()
+    closeFormTodoDialog()
   }
 
   return (
@@ -46,10 +37,12 @@ function App() {
             items={todos.filter(t => t.completed)}
           />
           <Footer>
-            <Dialog isOpen={showDialog} onClose={toggleDialog}>
-              <TodoForm onSubmit={handleFormSubmit} />
+            <Dialog isOpen={showDialog} onClose={closeFormTodoDialog}>
+              <TodoForm 
+              onSubmit={handleFormSubmit} 
+              />
             </Dialog>
-            <FabButton onClick={toggleDialog}>
+            <FabButton onClick={openFormTodoDialog}>
               <IconPlus />
             </FabButton>
           </Footer>
